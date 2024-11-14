@@ -25,7 +25,9 @@ Route::post('/fetchMessages', 'MessagesController@fetch')->name('api.fetch.messa
 /**
  * Download attachments route to create a downloadable links
  */
-Route::get('/download/{fileName}', 'MessagesController@download')->name('api.'.config('chatify.attachments.download_route_name'));
+Route::get('/download/{fileName}', 'MessagesController@download')->name(
+    'api.' . config('chatify.attachments.download_route_name')
+);
 
 /**
  * Make messages as seen
@@ -60,7 +62,9 @@ Route::post('/shared', 'MessagesController@sharedPhotos')->name('api.shared');
 /**
  * Delete Conversation
  */
-Route::post('/deleteConversation', 'MessagesController@deleteConversation')->name('api.conversation.delete');
+Route::post('/deleteConversation', 'MessagesController@deleteConversation')->name(
+    'api.conversation.delete'
+);
 
 /**
  * Delete Conversation
@@ -71,5 +75,3 @@ Route::post('/updateSettings', 'MessagesController@updateSettings')->name('api.a
  * Set active status
  */
 Route::post('/setActiveStatus', 'MessagesController@setActiveStatus')->name('api.activeStatus.set');
-
-

@@ -54,3 +54,6 @@ The official documentation can be found [here](https://chatify.munafio.com)
 
 - [Munaf A. Mahdi](https://www.munafio.com)
 
+## License
+
+Chatify is licensed under the [MIT license](https://choosealicense.com/licenses/mit/)

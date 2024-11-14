@@ -2,19 +2,6 @@
 
 All notable changes to this project will be documented in this file.
 
-## v1.6.5 ()
-
-### Fixed
-- Settings modal UI #351
-- Limit the data retrieved for the user #359
-- [FIX] - Init user conversation from URL #374
-- Sanitize inputs to prevent xss when sending message #377
-
-## v1.6.4 (2024-04-27)
-
-### Fixed
-- [fix bug] updateSelectedContact and IDinfo load if user_id != auth_id #339
-
 ## v1.6.3 (2024-03-17)
 
 ### Added
