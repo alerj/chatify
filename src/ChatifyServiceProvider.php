@@ -58,12 +58,15 @@ class ChatifyServiceProvider extends ServiceProvider
 
         // Migrations
         $this->publishes([
-            __DIR__ . '/database/migrations/2022_01_10_99999_add_active_status_to_users.php' => database_path('migrations/' . date('Y_m_d') . '_999999_add_active_status_to_users.php'),
-            __DIR__ . '/database/migrations/2022_01_10_99999_add_avatar_to_users.php' => database_path('migrations/' . date('Y_m_d') . '_999999_add_avatar_to_users.php'),
-            __DIR__ . '/database/migrations/2022_01_10_99999_add_dark_mode_to_users.php' => database_path('migrations/' . date('Y_m_d') . '_999999_add_dark_mode_to_users.php'),
-            __DIR__ . '/database/migrations/2022_01_10_99999_add_messenger_color_to_users.php' => database_path('migrations/' . date('Y_m_d') . '_999999_add_messenger_color_to_users.php'),
-            __DIR__ . '/database/migrations/2022_01_10_99999_create_chatify_favorites_table.php' => database_path('migrations/' . date('Y_m_d') . '_999999_create_chatify_favorites_table.php'),
-            __DIR__ . '/database/migrations/2022_01_10_99999_create_chatify_messages_table.php' => database_path('migrations/' . date('Y_m_d') . '_999999_create_chatify_messages_table.php'),
+            __DIR__ . '/database/migrations/2022_01_10_99999_add_active_status_to_users.php' => database_path('migrations/' . date('Y_m_d') . '_000000_add_active_status_to_users.php'),
+            __DIR__ . '/database/migrations/2022_01_10_99999_add_avatar_to_users.php' => database_path('migrations/' . date('Y_m_d') . '_000000_add_avatar_to_users.php'),
+            __DIR__ . '/database/migrations/2022_01_10_99999_add_channel_id_to_users.php' => database_path('migrations/' . date('Y_m_d') . '_000000_add_channel_id_to_users.php'),
+            __DIR__ . '/database/migrations/2022_01_10_99999_add_dark_mode_to_users.php' => database_path('migrations/' . date('Y_m_d') . '_000000_add_dark_mode_to_users.php'),
+            __DIR__ . '/database/migrations/2022_01_10_99999_add_messenger_color_to_users.php' => database_path('migrations/' . date('Y_m_d') . '_000000_add_messenger_color_to_users.php'),
+            __DIR__ . '/database/migrations/2022_01_10_99999_create_chatify_channels_table.php' => database_path('migrations/' . date('Y_m_d') . '_000000_create_chatify_channels_table.php'),
+            __DIR__ . '/database/migrations/2022_01_10_99999_create_chatify_favorites_table.php' => database_path('migrations/' . date('Y_m_d') . '_000000_create_chatify_favorites_table.php'),
+            __DIR__ . '/database/migrations/2022_01_10_99999_create_chatify_messages_table.php' => database_path('migrations/' . date('Y_m_d') . '_000000_create_chatify_messages_table.php'),
+            __DIR__ . '/database/migrations/2022_01_10_99999_create_chatify_channel_user_table.php' => database_path('migrations/' . date('Y_m_d') . '_000001_create_chatify_channel_user_table.php'),
         ], 'chatify-migrations');
 
         // Models
@@ -93,11 +96,6 @@ class ChatifyServiceProvider extends ServiceProvider
              // CSS
              __DIR__ . '/assets/sounds' => public_path('sounds/chatify'),
         ], 'chatify-assets');
-
-        // Routes (API and Web)
-        $this->publishes([
-            __DIR__ . '/routes' => base_path('routes/chatify')
-        ], 'chatify-routes');
     }
 
     /**
@@ -107,21 +105,12 @@ class ChatifyServiceProvider extends ServiceProvider
      */
     protected function loadRoutes()
     {
-        if (config('chatify.routes.custom')) {
-            Route::group($this->routesConfigurations(), function () {
-                $this->loadRoutesFrom(base_path('routes/chatify/web.php'));
-            });
-            Route::group($this->apiRoutesConfigurations(), function () {
-                $this->loadRoutesFrom(base_path('routes/chatify/api.php'));
-            });
-        } else {
-            Route::group($this->routesConfigurations(), function () {
-                $this->loadRoutesFrom(__DIR__ . '/routes/web.php');
-            });
-            Route::group($this->apiRoutesConfigurations(), function () {
-                $this->loadRoutesFrom(__DIR__ . '/routes/api.php');
-            });
-        }
+        Route::group($this->routesConfigurations(), function () {
+            $this->loadRoutesFrom(__DIR__ . '/routes/web.php');
+        });
+        Route::group($this->apiRoutesConfigurations(), function () {
+            $this->loadRoutesFrom(__DIR__ . '/routes/api.php');
+        });
     }
 
     /**
